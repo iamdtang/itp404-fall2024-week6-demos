@@ -1,8 +1,10 @@
 import { useState } from "react";
+import TextInput from "./TextInput";
 
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function App() {
+  const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState(""); // change to "usa" for default selection
   const [message, setMessage] = useState("");
@@ -13,6 +15,7 @@ export default function App() {
   function handleSubmit(event) {
     event.preventDefault();
     console.log({
+      name,
       phoneNumber,
       country,
       message,
@@ -25,17 +28,22 @@ export default function App() {
     <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="my-3">
-          <label htmlFor="phone" className="form-label">
-            Phone
-          </label>
-
-          <input
-            type="text"
-            className="form-control"
+          <TextInput
+            id="name"
+            label="Name"
+            value={name}
+            onChange={(updatedName) => {
+              setName(updatedName);
+            }}
+          />
+        </div>
+        <div className="my-3">
+          <TextInput
             id="phone"
+            label="Phone"
             value={phoneNumber}
-            onChange={(event) => {
-              setPhoneNumber(event.target.value);
+            onChange={(updatedPhoneNumber) => {
+              setPhoneNumber(updatedPhoneNumber);
             }}
           />
         </div>
